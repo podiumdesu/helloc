@@ -16,11 +16,9 @@ int main(void){
     for (times = n-1; times > 0; times--){
         for (t = 0; t <times; t++){
             if (array[t] > array[t+1]) {
-
-                j = array[t];
-                array[t] = array[t+1];
-                array[t+1] = j;
-
+                array[t] ^= array[t+1];   //利用异或进行计算
+                array[t+1] ^= array[t];
+                array[t] ^= array[t+1];
             }
         }
     }
