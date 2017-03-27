@@ -14,11 +14,8 @@
 
 
 #include <stdio.h>
-int main (void) {
-  int x;
+void PrintBit(int x) {
   int i;
-  printf("Please input a number\n");
-  scanf("%d",&x);
   char display[31];
   for(i = 0; i < 32 ;i++){
     display[i] = (x % 2 == 0) ? '0' : '1';
@@ -39,7 +36,26 @@ int main (void) {
   for (i = 7; i >= 0; i--) {
     putchar(display[i]);
   }
+  return;
+}
+
+int main (void) {
+  unsigned int x, p, n;
+  unsigned int mask = ~0;
+  printf("请输入一个整数x，从p位开始向左n位翻转，(x从右向左编号为0~31)\n");
+  scanf("%d %d %d", &x, &p, &n);
+  PrintBit(x);
+  printf("\n");
+  mask <<= (32 - p - n);
+  mask >>= (32 - n);
+  mask <<= p;
+
+  x ^= mask;
+  PrintBit(x);
+  printf("\n");
+
   return 0;
+
 }
 
 /*
