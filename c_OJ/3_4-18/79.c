@@ -4,21 +4,21 @@
 
 #include <stdio.h>
 #include <string.h>
-void whichNumber (int n[], int k);
+void whichNumber ( int k);
+static int length;
+static char n[100];
 int main (void) {
   int k;
-  char n[100];
-  while (scanf("%s%d",&n,&k) != EOF ) {
-    whichNumber(n[100],k);
+  while (scanf("%s%d",n,&k) != EOF ) {
+    length = strlen(n);
+    whichNumber(k);
   }
   return 0;
 }
-void whichNumber (int n[], int k) {
-  int length;
-  length = strlen(n);
+void whichNumber (int k) {
   if (k > length) {
-    printf("%d",-1);
+    printf("%d\n",-1);
   } else {
-    printf("%c",n[length-k]);
+    printf("%c\n",n[length-k]);
   }
 }
