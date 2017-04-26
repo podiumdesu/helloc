@@ -6,18 +6,31 @@ int main (void) {
   int students;
 
   int i;
+  int rank[100];
 
   while (scanf("%d",&students) != EOF) {
-    char name[SIZE][100];
+    char name[SIZE][50];
     int score[SIZE];
     for (i = 0; i < students; i++) {
-      scanf("%s %d",&name[i],&score[i]);
+      scanf("%s %d\n",&name[i],&score[i]);
     }
 
-    for (i = 0; i < students; i++) {
-      printf("%s %d",name[i],score[i]);
-    }
 
   }
   return 0;
+}
+
+for (int i = 0; i < size; i++) {
+  for (int j = i+1; j < size - i; j--) {
+    if (score[j-1]<score[j]) {
+      swap(score[j-1],score[j]);
+    }
+  }
+}
+
+void swap (int * p1, int * p2) {
+  int temp;
+  temp = *p1;
+  *p1 = *p2;
+  *p2 = temp;
 }
