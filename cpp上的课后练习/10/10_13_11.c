@@ -8,39 +8,69 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
+
+typedef int (*arr_t)[5];
+
+void print_arr(int (*arr)[5] , int ,int );
+void twice_arr(int (*arr)[5] , int ,int );
+int** threetimes_arr(int (*arr)[5], int rows, int cols);
+
 int main (void) {
-    int arr[3][5] = {1,1,1,1,1,2,2,2,2,2,3,3,3,3,3};
-    print_arr(arr,3);
-    twice_arr(arr,3);
-    return 0;
+
+  printf("Please input the array");
+  int array[3][5] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+  print_arr(array,3,5);
+  twice_arr(array,3,5);
+  int (*ptr)[5];
+  ptr = threetimes_arr(array,3,5);
+  printf("\n\n");
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j< 5; j++) {
+      printf("%4d ",3* (*(*(ptr+i)+j)));
+    }
+    printf("\n");
+  }
+  printf("bye");
+  return 0;
+
 }
 
-void print_arr(int (*ptr)[5] , int n) {
-    for (int i = 0; i < n; i++) {
-
+void print_arr (int (*arr)[5], int rows, int cols) {
+  printf("The original array is :\n");
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j< cols; j++) {
+      printf("%4d ",(*(*(arr+i)+j)));
     }
+    printf("\n");
+  }
 }
 
-
-
-
-#include <stdio.h>
-void copy_arr(double (*t)[3], double (*s)[3]);
-int main (void) {
-    double target[2][3];
-    double *ptr=(double *)target;
-    double two_arr[2][3] = {11.1,12.2,13.3,14.4,15.5,16.6};
-    copy_arr(target,two_arr);
-    for (int i = 0; i < 6; i++ ) {
-        printf("%lf ",*ptr);
-        (ptr)++;
+void twice_arr (int (*arr)[5] , int rows, int cols) {
+  printf("and This is the twice value of this array!!\n");
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j< cols; j++) {
+      printf("%4d ",2* (*(*(arr+i)+j)));
     }
+    printf("\n");
+  }
+  printf("\nThis is just a test\n");
+  for (int i = 0,count = 1; i < cols*rows; i++) {
+    printf("%4d ", arr[0][0]+i);
+    if (count == 5) {
+      printf("\n");
+      count = 0;
+    }
+    count ++;
+  }
 }
 
-
-void copy_arr(double (*t)[3], double (*s)[3]) {
-    for (int i = 0; i < 6; i++ ) {
-        *((double *)t+i) = *((double *)s+i);
+int** threetimes_arr(int (*arr)[5], int rows, int cols) {
+  int (*new)[5] = malloc(sizeof(int)*15);
+  for (int i = 0 ; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      new[i][j] = *(*(arr+i)+j);
     }
-
+  }
+  return new;
 }
